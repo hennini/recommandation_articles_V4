@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommandation de Livres</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #2980b9;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            width: 50%;
+            margin: 10px 0;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #bdc3c7;
+        }
+
+        th {
+            background-color: #2980b9;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        p {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .header-image {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .header-image img {
+            width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête avec une image -->
+    <div class="header-image">
+        <img src="https://cdn-icons-png.flaticon.com/512/29/29302.png" alt="Livre">
+    </div>
+
+    <h1>Recommandations de Livres</h1>
+
+    <div class="container">
+        <!-- Formulaire pour entrer l'ID utilisateur -->
+        <div class="form-container">
+            <form method="POST" action="/">
+                <label for="userid">Entrez votre ID utilisateur :</label><br>
+                <input type="number" id="userid" name="userid" required>
+                <button type="submit">Voir les recommandations</button>
+            </form>
+        </div>
+
+        <!-- Affichage des recommandations s'il y en a -->
+        {% if user_id %}
+            <h2>Recommandations pour l'utilisateur {{ user_id }}</h2>
+
+            {% if recommendations %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID de l'Article</th>
+                            <th>Nom du Livre</th>
+                            <th>Catégorie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in recommendations %}
+                        <tr>
+                            <td>{{ article.article_id }}</td>
+                            <td>{{ article.title }}</td>
+                            <td>{{ article.category }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Aucune recommandation trouvée pour cet utilisateur.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
