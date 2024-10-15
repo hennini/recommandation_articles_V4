@@ -117,23 +117,21 @@
 
         <!-- Affichage des recommandations s'il y en a -->
         {% if user_id %}
-            <h2>Recommandations pour l'utilisateur {{ user_id }}</h2>
+            <h2>Recommandations pour l'utilisateur dont l'user_id est : {{ user_id }}</h2>
 
             {% if recommendations %}
                 <table>
                     <thead>
                         <tr>
                             <th>ID de l'Article</th>
-                            <th>Nom du Livre</th>
-                            <th>Catégorie</th>
+                            <th>ID de la Catégorie</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for article in recommendations %}
                         <tr>
                             <td>{{ article.article_id }}</td>
-                            <td>{{ article.title }}</td>
-                            <td>{{ article.category }}</td>
+                            <td>{{ article.category_id }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
