@@ -72,14 +72,14 @@ app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 def reco_api_V4(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
-    name = req.params.get('name')
+    name = req.params.get('userid')
     if not name:
         try:
             req_body = req.get_json()
         except ValueError:
             pass
         else:
-            name = req_body.get('name')
+            name = req_body.get('userid')
 
     if name:
         recommendations = predict_best_category_for_user(name)
